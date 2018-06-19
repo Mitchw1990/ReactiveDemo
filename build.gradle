@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     }
 }
 
@@ -23,16 +23,19 @@ repositories {
     mavenCentral()
 }
 
-
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
-    compile('org.springframework.boot:spring-boot-starter-webflux')
-    compile('org.apache.kafka:kafka-streams:1.0.1')
-    compile('org.springframework.kafka:spring-kafka')
-    compile "io.projectreactor.kafka:reactor-kafka:1.0.0.RELEASE"
-    runtime('org.springframework.boot:spring-boot-devtools')
-    compileOnly('org.projectlombok:lombok')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
-    testCompile('io.projectreactor:reactor-test')
+    compile 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    compile 'org.springframework.boot:spring-boot-starter-webflux'
+    compile 'io.projectreactor.kafka:reactor-kafka:1.0.0.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-tomcat'
+    compile 'org.springframework.kafka:spring-kafka'
+    compile 'org.apache.kafka:kafka-streams:1.0.1'
+    compile 'org.webjars:highcharts:6.1.0'
+    compile 'org.webjars:bootstrap:3.3.7'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+    testCompile 'io.projectreactor:reactor-test'
+    runtime 'org.springframework.boot:spring-boot-devtools'
+    compileOnly 'org.projectlombok:lombok'
 }

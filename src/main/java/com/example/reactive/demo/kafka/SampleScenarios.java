@@ -556,7 +556,7 @@ public class SampleScenarios {
     static abstract class AbstractScenario {
         String bootstrapServers = BOOTSTRAP_SERVERS;
         String groupId = "sample-group";
-        CommittableSource source;
+        CommittableSource source = new CommittableSource();
         KafkaSender<Integer, Person> sender;
         List<Disposable> disposables = new ArrayList<>();
 

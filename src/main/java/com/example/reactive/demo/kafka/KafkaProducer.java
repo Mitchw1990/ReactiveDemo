@@ -15,25 +15,28 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.kafka.sender.KafkaSender;
 import reactor.kafka.sender.SenderOptions;
 import reactor.kafka.sender.SenderRecord;
 
+import javax.annotation.PostConstruct;
+
+@Service
 public class KafkaProducer {
 
     private static final Logger log = LoggerFactory.getLogger(KafkaProducer.class.getName());
 
     private static final String BOOTSTRAP_SERVERS = "localhost:9092";
-    private static final String TOPIC = "demo-topic";
 
     private final KafkaSender<Integer, String> sender;
     private final SimpleDateFormat dateFormat;
 
-    public KafkaProducer(String bootstrapServers) {
+    public KafkaProducer() {
 
         Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
         props.put(ProducerConfig.CLIENT_ID_CONFIG, "sample-producer");
         props.put(ProducerConfig.ACKS_CONFIG, "all");
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class);
@@ -62,14 +65,5 @@ public class KafkaProducer {
 
     public void close() {
         sender.close();
-    }
-
-    public static void main(String[] args) throws Exception {
-        int count = 20;
-        CountDownLatch latch = new CountDownLatch(count);
-        KafkaProducer producer = new KafkaProducer(BOOTSTRAP_SERVERS);
-        producer.sendMessages(TOPIC, count, latch);
-        latch.await(10, TimeUnit.SECONDS);
-        producer.close();
     }
 }
